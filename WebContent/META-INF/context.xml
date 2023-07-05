@@ -21,11 +21,17 @@
 		Connector/J driver is com.mysql.jdbc.Driver. -->
 
 	<!-- url: The JDBC connection url for connecting to your MySQL database. -->
-
+	
 	<Resource name="jdbc/nakamura_shoppingsite" auth="Container"
 		type="javax.sql.DataSource" maxTotal="100" maxIdle="30"
-		maxWaitMillis="10000" username="admin" password="​Aforce2023​"
+		maxWaitMillis="10000" username="root" password="Ryu0801zo"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/nakamura_shoppingsite" />
+<!-- 
+	<Resource name="jdbc/nakamura_shoppingsite" auth="Container"
+		type="javax.sql.DataSource" maxTotal="100" maxIdle="30"
+		maxWaitMillis="10000" username="admin" password="Aforce2023"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://training-2023-db.cqf3ld6na4nc.ap-northeast-1.rds.amazonaws.com:3306/nakamura_shoppingsite" />
-
+-->
 </Context>
