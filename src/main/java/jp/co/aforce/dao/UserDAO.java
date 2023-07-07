@@ -176,6 +176,38 @@ public int search05(String userId, String phoneNumber) throws Exception {
 		return line;
 	}
 	
+	public int update02(User user, String userId) throws Exception{
+		Connection con = getConnection();
+		
+		PreparedStatement st = con.prepareStatement("UPDATE user_info SET "
+				+ "USER_ID = ? "
+				+ "WHERE MAIL_ADDRESS = ?");
+		st.setString(1, userId);
+		st.setString(2, user.getMailAddress());
+		int line = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return line;
+	}
+	
+	public int update03(User user, String password) throws Exception{
+		Connection con = getConnection();
+		
+		PreparedStatement st = con.prepareStatement("UPDATE user_info SET "
+				+ "PASSWORD = ? "
+				+ "WHERE USER_ID = ?");
+		st.setString(1, password);
+		st.setString(2, user.getUserId());
+		int line = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return line;
+	}
+	
 	public int delete01(String userId) throws Exception {
 		Connection con = getConnection();
 

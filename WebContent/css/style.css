@@ -252,6 +252,10 @@ header a{
 
 .div-info{
 	width: 400px;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	grid-column: 2/3;
 }
 
 #logout-btn{
@@ -261,7 +265,7 @@ header a{
 
 .div-background{
 	height: 100vh;
-	background-color: #f1f1f1;
+	background-color: rgb(253, 232, 236);
 }
 
 .div-logo{
@@ -269,11 +273,59 @@ header a{
 	padding: 0px 40px;
 }
 
-.user-info {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0);
+.div-user-info{
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	position: relative;
+	height: 100%;
 }
+
+.user-info-menu{
+	display: grid;
+	grid-template-rows: max-content max-content max-content auto;
+	position: absolute;
+	top: 80px;
+	height: calc(100vh - 80px);
+	width: 25%;
+	border-right: 1px solid grey;
+}
+
+.user-info-menu div {
+	border-bottom: 1px solid lightgrey;
+	padding-left: 3%;
+	font-weight: bold;
+}
+
+.user-info-menu div:hover {
+	color: #ef2346;
+	cursor: pointer;
+}
+
+#user-logout-form {
+	position: relative;
+}
+
+#user-logout-form div {
+	position: absolute;
+	bottom: 3%;
+	width: 94%;
+	border-bottom: none;
+}
+
+#user-logout-form input {
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#user-id-form {
+	padding-top: 60px;
+}
+
+#user-password-form {
+	padding-top: 60px;
+}
+
 
 /*===============入力フォーム==================*/
 .form-text {
