@@ -124,7 +124,73 @@ Array.from(document.getElementsByClassName('home-img'))
     	});
 });
 
+/*================会員情報画面クリックイベント=================*/
 
+// 会員情報変更/削除
+$('#update-user-info').on('click', function(){
+	// 表示画面変更
+	$('.user-info').show();
+	$('.user-id').hide();
+	$('.user-password').hide();
+	
+	// 選択中のメニューを強調
+	$('#update-user-info p').css({
+		'text-decoration': 'underline',
+		color: '#ef2346'
+	});
+	$('#update-user-id p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+	$('#update-user-password p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+});
+
+// ユーザID変更
+$('#update-user-id').on('click', function(){
+	// 表示画面変更
+	$('.user-info').hide();
+	$('.user-id').show();
+	$('.user-password').hide();
+	
+	// 選択中のメニューを強調
+	$('#update-user-info p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+	$('#update-user-id p').css({
+		'text-decoration': 'underline',
+		color: '#ef2346'
+	});
+	$('#update-user-password p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+});
+
+// パスワード変更
+$('#update-user-password').on('click', function(){
+	// 表示画面変更
+	$('.user-info').hide();
+	$('.user-id').hide();
+	$('.user-password').show();
+	
+	// 選択中のメニューを強調
+	$('#update-user-info p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+	$('#update-user-id p').css({
+		'text-decoration': 'none',
+		color: 'black'
+	});
+	$('#update-user-password p').css({
+		'text-decoration': 'underline',
+		color: '#ef2346'
+	});
+});
 
 /*=================マンガ一覧クリックイベント==================*/
 
@@ -187,6 +253,24 @@ $('#user-update-btn').on('click', function(){
 // 会員情報削除における確認画面ポップアップ表示
 $('#user-delete-btn').on('click', function(){
 	$('#user-delete-conf').show();
+   	$('body').css('overflow-y', 'hidden');
+});
+
+// ユーザID更新における確認画面ポップアップ表示
+$('#userId-update-btn').on('click', function(){
+	if(!$('#user-id-form')[0].reportValidity()) {
+    		 return false;
+   	}
+   	$('#userId-update-conf').show();
+   	$('body').css('overflow-y', 'hidden');
+});
+
+// パスワード更新における確認画面ポップアップ表示
+$('#password-update-btn').on('click', function(){
+	if(!$('#user-password-form')[0].reportValidity()) {
+    		 return false;
+   	}
+   	$('#password-update-conf').show();
    	$('body').css('overflow-y', 'hidden');
 });
 
@@ -282,6 +366,20 @@ $('#user-delete-conf .ok-btn').on('click', function(){
   	$('body').css('overflow-y', 'auto');
   	$('#user-info-form').attr('action', '/ShoppingSite/servlet/user-delete')
   	$('#user-info-form').submit();
+});
+
+// 確認画面(ユーザID変更)「OK(更新)」押下時
+$('#userId-update-conf .ok-btn').on('click', function(){
+	$(".conf-popup").hide(); // 確認ボックスを消す
+  	$('body').css('overflow-y', 'auto');
+  	$('#user-id-form').submit();
+});
+
+// 確認画面(パスワード変更)「OK(更新)」押下時
+$('#password-update-conf .ok-btn').on('click', function(){
+	$(".conf-popup").hide(); // 確認ボックスを消す
+  	$('body').css('overflow-y', 'auto');
+  	$('#user-password-form').submit();
 });
 
 // 確認画面(ログアウト)「OK(ログアウト)」押下時

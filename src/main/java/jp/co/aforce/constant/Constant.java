@@ -14,7 +14,7 @@ public class Constant {
 		public static final String BIRTH_MONTH = "生年月日_月";
 		public static final String BIRTH_DAY = "生年月日_日";
 		public static final String PHONE_NUMBER = "電話番号";
-		public static final String MAIL＿ADDRESS = "メールアドレス";
+		public static final String MAIL_ADDRESS = "メールアドレス";
 		public static final String ADDRESS = "住所";
 		
 		public static final String MANGA_ID = "マンガID";
@@ -37,6 +37,8 @@ public class Constant {
 		public static final String W_C0003 = "パスワードが一致していません";
 		public static final String W_C0004 = "'{0}'は既に追加されています。";
 		public static final String W_C0005 = "この商品は既に追加されています。";
+		public static final String W_C0006 = "現在のパスワードが間違っています。";
+		public static final String W_C0007 = "新しいパスワードが一致していません";
 		public static final String E_W0001 = "会員情報登録に失敗しました。";
 		public static final String E_W0002 = "会員情報更新に失敗しました。";
 		public static final String E_W0003 = "会員情報削除に失敗しました。";
@@ -46,6 +48,7 @@ public class Constant {
 		public static final String E_W0007 = "商品情報追加に失敗しました。";
 		public static final String E_W0008 = "商品情報更新に失敗しました。";
 		public static final String E_W0009 = "商品情報削除に失敗しました。";
+		public static final String E_W0010 = "{0}の更新に失敗しました。";
 		public static final String E_C0001 = "{0}は存在しません";
 		public static final String I_W0001 = "マンガタイトル情報追加が完了しました。";
 		public static final String I_W0002 = "ID'{0}' のマンガタイトル情報更新が完了しました。";
@@ -55,6 +58,7 @@ public class Constant {
 		public static final String I_W0006 = "ID'{0}' の商品情報削除が完了しました。";
 		public static final String I_W0007 = "会員情報更新が完了しました。";
 		public static final String I_W0008 = "会員情報削除が完了しました。";
+		public static final String I_W0009 = "{0}の更新が完了しました。";
 	}
 	
 	// 支払方法
