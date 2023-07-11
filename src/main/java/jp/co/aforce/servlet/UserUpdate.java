@@ -36,7 +36,7 @@ public class UserUpdate extends HttpServlet {
 				user.setBirthYear(Integer.parseInt(request.getParameter("birthYear")));
 				user.setBirthMonth(Integer.parseInt(request.getParameter("birthMonth")));
 				user.setBirthDay(Integer.parseInt(request.getParameter("birthDay")));
-				user.setPhoneNumber((String)request.getParameter("phoneNumber").replace("-", ""));
+				user.setPhoneNumber(request.getParameter("phoneNumber").replace("-", ""));
 				user.setMailAddress(request.getParameter("mailAddress"));
 				user.setAddress(request.getParameter("address"));
 				
@@ -50,7 +50,7 @@ public class UserUpdate extends HttpServlet {
 				int countMailAddress = dao.search06(user.getUserId(),user.getMailAddress());
 				if(countMailAddress >= 1) {
 					error = true;
-					session.setAttribute("mailAddressError", Message.W_C0002.replace("{0}", ItemName.MAIL＿ADDRESS));
+					session.setAttribute("mailAddressError", Message.W_C0002.replace("{0}", ItemName.MAIL_ADDRESS));
 				}
 				UserInfo.setUserInfo(session, user);
 				if(!error) {
@@ -63,30 +63,35 @@ public class UserUpdate extends HttpServlet {
 					}
 				}
 				session.setAttribute("update", "info");
-			}else if(request.getParameter("update").equals("id")){
+			}else if(update.equals("id")){
 				String newUserId = request.getParameter("newUserId");
 				user.setMailAddress(request.getParameter("mailAddress"));
 				int count = dao.search01(newUserId);
 				if(count != 0) {
-					session.setAttribute("userIdManagementMessage", "このIDはすでに使用されています。");
+					session.setAttribute("userIdManagementMessage", Message.W_C0002.replace("{0}", ItemName.USER_ID));
 					session.setAttribute("newUserId", newUserId);
 				}else {
-					dao.update02(user, newUserId);
-					user = dao.search02(newUserId);
-					session.setAttribute("userIdManagementMessage", "ユーザIDの更新完了しました");
-					session.setAttribute("user", user);
+					int line = dao.update02(user, newUserId);
+					if(line != 1) {
+						session.setAttribute("userIdManagementMessage", Message.E_W0010.replace("{0}", ItemName.USER_ID));
+					}else {
+						user = dao.search02(newUserId);
+						session.setAttribute("userIdManagementMessage", Message.I_W0009.replace("{0}", ItemName.USER_ID));
+						session.setAttribute("user", user);
+					}
 				}
 				session.setAttribute("update", "id");
 			}else {
 				String currentPass = request.getParameter("currentPassword");
+				String userPass = dao.search02(user.getUserId()).getPassword();
 				String newPass = request.getParameter("newPassword");
 				String newPass2 = request.getParameter("newPassword2");
 				String errorMessage = "";
-				if(!currentPass.equals(dao.search02(user.getUserId()).getPassword())) {
-					errorMessage += "現在のパスワードが間違っています<br>";
+				if(!currentPass.equals(userPass)) {
+					errorMessage = errorMessage + Message.W_C0006 + "<br>";
 				}
 				if(!newPass.equals(newPass2)) {
-					errorMessage += "新しいパスワードが一致していません<br>";
+					errorMessage = errorMessage + Message.W_C0007;
 				}
 				if(errorMessage.length() != 0) {
 					session.setAttribute("passwordManagementMessage", errorMessage);
@@ -94,10 +99,14 @@ public class UserUpdate extends HttpServlet {
 					session.setAttribute("newPassword", newPass);
 					session.setAttribute("newPassword2", newPass2);
 				} else {
-					dao.update03(user, newPass);
-					user = dao.search02(user.getUserId());
-					session.setAttribute("passwordManagementMessage", "パスワードの更新完了しました");
-					session.setAttribute("user", user);
+					int line = dao.update03(user, newPass);
+					if(line != 1) {
+						session.setAttribute("passwordManagementMessage", Message.E_W0010.replace("{0}", ItemName.PASSWARD));
+					}else {
+						user = dao.search02(user.getUserId());
+						session.setAttribute("passwordManagementMessage", Message.I_W0009.replace("{0}", ItemName.PASSWARD));
+						session.setAttribute("user", user);
+					}
 				}
 				session.setAttribute("update", "password");
 			}

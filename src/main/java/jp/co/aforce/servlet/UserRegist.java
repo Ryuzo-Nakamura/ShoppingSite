@@ -58,7 +58,7 @@ public class UserRegist extends HttpServlet {
 			int countMailAddress = dao.search04(user.getMailAddress());	// 入力されたメールアドレスがすでに登録されてないかどうかチェック
 			if(countMailAddress >= 1) {
 				error = true;
-				session.setAttribute("mailAddressError", Message.W_C0002.replace("{0}", ItemName.MAIL＿ADDRESS));
+				session.setAttribute("mailAddressError", Message.W_C0002.replace("{0}", ItemName.MAIL_ADDRESS));
 			}
 			UserInfo.setUserInfo(session, user); // セッション属性にユーザー情報をセット
 			if(error) {

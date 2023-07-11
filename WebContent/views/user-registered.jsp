@@ -23,7 +23,7 @@
 	<p>名前：${lastName} ${firstName}</p>
 	<p>生年月日：${birthYear}年 ${birthMonth}月 ${birthDay}日</p>
 	<p><%=ItemName.PHONE_NUMBER %>：${phoneNumber}</p>
-	<p><%=ItemName.MAIL＿ADDRESS %>：${mailAddress}</p>
+	<p><%=t(ItemName.%>：${mailAddress}</p>
 	<p><%=ItemName.ADDRESS %>：${address}</p>
 </div>
 
