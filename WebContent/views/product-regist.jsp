@@ -22,57 +22,78 @@
 
 <main>
 
-<h1>商品追加</h1>
+	<h1>商品追加</h1>
 
-<a href="/ShoppingSite/views/product-add.jsp">&lt;&lt;商品一覧に戻る</a>
+	<a href="/ShoppingSite/views/product-add.jsp">&lt;&lt;商品一覧に戻る</a>
 
-<c:set var="manga" value="${adminManga}"/>
+	<c:set var="manga" value="${adminManga}" />
 
-<div class="manga-list product-manga-list">
-	<div class="mangaList-img"><c:choose>
-		<c:when test="${manga.getImgURL() != null}">
-			<img src="${'/ShoppingSite/img/item/'.concat(manga.getImgURL())}" height="150px" width="auto">
-		</c:when>
-		<c:otherwise>
-			<img src="/ShoppingSite/img/no-image.png" height="120px" width="auto">
-		</c:otherwise>
-		</c:choose></div>
-	<p class="manga-title">${manga.getTitle()}</p>
-	<p class="manga-info">
-		作者：${manga.getAuthorString()}<br>
-		出版社：${manga.getPublisher()}<br>
-		ジャンル：${manga.getGenreString()}<br>
-		総巻数：${manga.getTotalNumber()}巻
-	</p>
-</div>
-
-<hr>
-<p> </p>
-
-<div>
-<form action="/ShoppingSite/servlet/product-add" method="post" enctype="multipart/form-data" id="product-add-form">
-	<input type="hidden" name="mangaId" value="<c:if test="${manga.getMangaId() != null}">${manga.getMangaId()}</c:if>">
-	
-	<p>巻数</p>
-	<input type="number" name="number" class="form-text number-form" value="<c:if test="${product.getNumber() != null}">${product.getNumber()}</c:if>" min="0" max="999" required>
-	
-	<p>価格</p>
-	<input type="number" name="price" class="form-text price-form" value="<c:if test="${product.getPrice() != null}">${product.getPrice()}</c:if>" min="0" required>
-	
-	<p>作品情報</p>
-	<textarea name="description" rows="5" cols="75" class="form-textarea">${product.getDescription()}</textarea>
-	
-	<p>商品画像アップロード</p>
-	<input type="file" name="img" accept="imaga/*" required>
-
-	
-	<p><c:if test="${productAddMessage != null}">${productAddMessage}</c:if></p>
-
-	<div class="div-btn">
-		<input type="button" value="追加" id="product-add-btn" class="medium-btn">
+	<div class="manga-list product-manga-list">
+		<div class="mangaList-img">
+			<c:choose>
+				<c:when test="${manga.getImgURL() != null}">
+					<img src="${'/ShoppingSite/img/item/'.concat(manga.getImgURL())}"
+						height="150px" width="auto">
+				</c:when>
+				<c:otherwise>
+					<img src="/ShoppingSite/img/no-image.png" height="120px"
+						width="auto">
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<p class="manga-title">${manga.getTitle()}</p>
+		<p class="manga-info">
+			作者：${manga.getAuthorString()}<br> 出版社：${manga.getPublisher()}<br>
+			ジャンル：${manga.getGenreString()}<br>
+			総巻数：${manga.getTotalNumber()}巻
+		</p>
 	</div>
-</form>
-</div>
+
+	<hr>
+	<p></p>
+
+	<div>
+		<form action="/ShoppingSite/servlet/product-add" method="post" enctype="multipart/form-data" id="product-add-form" class="product-form">
+			<input type="hidden" name="mangaId"
+				value="<c:if test="${manga.getMangaId() != null}">${manga.getMangaId()}</c:if>">
+			<div class="div-number">
+				<p>巻数</p>
+				<input type="number" name="number" class="form-text number-form"
+					value="<c:if test="${product.getNumber() != null}">${product.getNumber()}</c:if>"
+					min="0" max="999" required>
+			</div>
+			<div class="div-price">
+				<p>価格</p>
+				<input type="number" name="price" class="form-text price-form"
+					value="<c:if test="${product.getPrice() != null}">${product.getPrice()}</c:if>"
+					min="0" required>
+			</div>
+			<div class="div-description">
+				<p>作品情報</p>
+				<textarea name="description" rows="6" cols="75"
+					class="form-textarea">${product.getDescription()}</textarea>
+			</div>
+			<div class="div-file">
+				<p>商品画像アップロード</p>
+				<input type="file" name="img" id="addImg" class="form-file"
+					accept="imaga/*" required>
+
+				<figure class="imgPreview" style="display: none">
+					<img src="" id="addImgPreview">
+				</figure>
+			</div>
+			<div class="div-message">
+				<p>
+					<c:if test="${productAddMessage != null}">${productAddMessage}</c:if>
+				</p>
+
+				<div class="div-btn">
+					<input type="button" value="追加" id="product-add-btn"
+						class="medium-btn">
+				</div>
+			</div>
+		</form>
+	</div>
 </main>
 <%
 	session.removeAttribute("manga");
