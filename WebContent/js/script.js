@@ -18,7 +18,7 @@ function EachTextAnimeControl() {
 
 //スクロールした際の動きを関数でまとめる
 function PageTopAnime() {
-
+	if($('#page-top')[0] != null){
 		var scroll = $(window).scrollTop(); //スクロール値を取得
 		if (scroll >= 200){//200pxスクロールしたら
 			$('#page-top').removeClass('DownMove');		// DownMoveというクラス名を除去して
@@ -40,6 +40,7 @@ function PageTopAnime() {
 				$('#page-top').css('bottom','10px');// 下から10pxの位置にページリンクを指定
 			}
 		}
+	}
 }
 
 $(window).scroll(function () {
@@ -229,6 +230,18 @@ $('#user-manga-sort').change(function(){
 $('#user-product-sort').change(function(){
 	$('#product-sort-form').submit();
 });
+
+/*========商品追加/編集における画像選択時のイベント==============*/
+
+$('#addImg').on('change',function(e){
+	let fileReader = new FileReader();
+	fileReader.onload = function(e){
+		$('.imgPreview').show();
+		$('#addImgPreview').attr('src', e.target.result);
+	}
+	fileReader.readAsDataURL(e.target.files[0]);
+});
+
 
 /*=================確認画面ポップアップ======================*/
 
