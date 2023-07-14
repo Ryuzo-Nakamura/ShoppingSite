@@ -71,7 +71,7 @@
 			<div class="div-description">
 				<p>作品情報</p>
 				<textarea name="description" rows="6" cols="75"
-					class="form-textarea">${product.getDescription()}</textarea>
+					class="form-textarea" required>${product.getDescription()}</textarea>
 			</div>
 			<div class="div-file">
 				<p>商品画像アップロード</p>
