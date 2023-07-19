@@ -36,41 +36,69 @@
 
 <main>
 
-<h2>商品情報管理</h2>
+	<h1>商品情報管理</h1>
 
-<div class="product-list">	
-	<div class="productList-img">		
-		<img src="${'/ShoppingSite/img/item/'.concat(product.getImgURL())}" height="120px" width="auto">
-	</div>
-	<p class="manga-title">${manga.getTitle()} (${product.getNumber()})</p>
-	<p class="product-price"><span class="price"><span class="yen">￥</span>${product.getPrice()}</span></p>
-	<p class="description">${product.getDescription()}</p>
-</div>
+	<a href="/ShoppingSite/views/product-management.jsp">&lt;&lt;商品一覧に戻る</a>
 
-<form method="post" id="product-info-form">
-	<input type="hidden" name="productId" value="<c:if test="${product.getProductId() != null}">${product.getProductId()}</c:if>">
-	
-	<p>巻数</p>
-	<input type="number" name="number" class="form-text number-form" value="<c:if test="${product.getNumber() != null}">${product.getNumber()}</c:if>" min="0" max="999" required>
-	
-	<p>価格</p>
-	<input type="number" name="price" class="form-text price-form" value="<c:if test="${product.getPrice() != null}">${product.getPrice()}</c:if>" min="0" required>
-	
-	<p>作品情報</p>
-	<textarea name="description" rows="5" cols="75" class="form-textarea">${product.getDescription()}</textarea>
-	
-	<p><c:if test="${productManagementMessage != null}">${productManagementMessage}</c:if></p>
-	
-	<div class="div-btn">
-		<input type="button" value="削除" id="product-delete-btn" class="medium-btn reverse-btn">
-		<input type="button" value="更新" id="product-update-btn" class="medium-btn">
+	<div class="product-list">
+		<div class="productList-img">
+			<img src="${'/ShoppingSite/img/item/'.concat(product.getImgURL())}"
+				height="120px" width="auto">
+		</div>
+		<p class="manga-title">${manga.getTitle()}
+			(${product.getNumber()})</p>
+		<p class="product-price">
+			<span class="price"><span class="yen">￥</span>${product.getPrice()}</span>
+		</p>
+		<p class="description">${product.getDescription()}</p>
 	</div>
-</form>
+
+	<form method="post" id="product-info-form" class="product-form" enctype="multipart/form-data">
+		<input type="hidden" name="productId"
+			value="<c:if test="${product.getProductId() != null}">${product.getProductId()}</c:if>">
+
+		<div class="div-number">
+			<p>巻数</p>
+			<input type="number" name="number" class="form-text number-form"
+				value="<c:if test="${product.getNumber() != null}">${product.getNumber()}</c:if>"
+				min="0" max="999" required>
+		</div>
+		<div class="div-price">
+			<p>価格</p>
+			<input type="number" name="price" class="form-text price-form"
+				value="<c:if test="${product.getPrice() != null}">${product.getPrice()}</c:if>"
+				min="0" required>
+		</div>
+		<div class="div-description">
+			<p>作品情報</p>
+			<textarea name="description" rows="6" cols="75" class="form-textarea"
+				required>${product.getDescription()}</textarea>
+		</div>
+		<div class="div-file">
+			<p>商品画像アップロード</p>
+			<input type="file" name="img" id="updateImg" class="form-file" accept="imaga/*">
+
+			<figure class="imgPreview">
+				<img src="${'/ShoppingSite/img/item/'.concat(product.getImgURL())}" id="updateImgPreview">
+				<figcaption>${product.getImgURL()}</figcaption>
+			</figure>
+		</div>
+		<div class="div-message">
+			<p>
+				<c:if test="${productManagementMessage != null}">${productManagementMessage}</c:if>
+			</p>
+
+			<div class="div-btn">
+				<input type="button" value="削除" id="product-delete-btn" class="medium-btn reverse-btn"> 
+				<input type="button" value="更新" id="product-update-btn" class="medium-btn">
+			</div>
+		</div>
+	</form>
 </main>
-<% 
-	session.removeAttribute("manga");
-	session.removeAttribute("product");
-	session.removeAttribute("productManagementMessage"); 
+<%
+session.removeAttribute("manga");
+session.removeAttribute("product");
+session.removeAttribute("productManagementMessage");
 %>
 
 
