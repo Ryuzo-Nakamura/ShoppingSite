@@ -1,9 +1,13 @@
 package jp.co.aforce.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +22,7 @@ import jp.co.aforce.dao.ProductDAO;
 
 
 @WebServlet("/servlet/product-delete")
+@MultipartConfig
 public class ProductDelete extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -25,9 +30,11 @@ public class ProductDelete extends HttpServlet {
 		
 		try {
 			String productId = request.getParameter("productId");
-			
 			ProductDAO productDAO = new ProductDAO();
 			Product product = productDAO.search02(productId);
+			
+			String mangaId = product.getMangaId();
+			String imgURL = product.getImgURL();
 			
 			int line = productDAO.delete01(productId); // 商品をデータベースから削除
 			if(line != 1) {
@@ -37,6 +44,14 @@ public class ProductDelete extends HttpServlet {
 				Manga manga = mangaDAO.search03(product.getMangaId());
 				manga.reduceTotalNumber(); // 総巻数を減らす
 				mangaDAO.update02(manga);
+				
+				// 最新の単行本の画像をマンガタイトルの画像に変更
+				mangaDAO.update04(mangaId, productDAO.search04(mangaId));
+				session.setAttribute("adminManga", mangaDAO.search03(mangaId));
+				
+				// 削除した商品の画像ファイルをフォルダから削除
+				String path=getServletContext().getRealPath("/img/item");
+				Files.delete(Paths.get(path+File.separator+imgURL));
 				
 				// 表示するマンガタイトルリスト、商品リストを削除後の状態に更新
 				String title = (String) session.getAttribute("adminSearchTitle");

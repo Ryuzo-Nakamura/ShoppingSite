@@ -71,8 +71,8 @@ public class ProductAdd extends HttpServlet {
 						part.write(path+File.separator+filename);
 						manga.raiseTotalNumber(); // 総巻数を増やす
 						mangaDAO.update02(manga);
-						manga.setImgURL(filename);
-						mangaDAO.update03(manga);
+						mangaDAO.update04(mangaId, productDAO.search04(mangaId));
+						manga.setImgURL(mangaDAO.search03(mangaId).getImgURL());
 						session.setAttribute("adminManga", manga);
 						String title = (String) session.getAttribute("adminSearchTitle");
 						List<Manga> mangaList = mangaDAO.search04(title); 

@@ -242,6 +242,14 @@ $('#addImg').on('change',function(e){
 	fileReader.readAsDataURL(e.target.files[0]);
 });
 
+$('#updateImg').on('change',function(e){
+	let fileReader = new FileReader();
+	fileReader.onload = function(e){
+		$('.imgPreview').show();
+		$('#updateImgPreview').attr('src', e.target.result);
+	}
+	fileReader.readAsDataURL(e.target.files[0]);
+});
 
 /*=================確認画面ポップアップ======================*/
 

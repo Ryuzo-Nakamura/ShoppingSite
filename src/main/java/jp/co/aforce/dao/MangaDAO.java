@@ -243,6 +243,21 @@ public class MangaDAO extends DAO{
 		return line;
 	}
 	
+	public int update04(String mangaId, String imgURL) throws Exception {
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement("UPDATE manga_info SET "
+				+ "IMG_URL = ? WHERE MANGA_ID = ?");
+		st.setString(1, imgURL);
+		st.setString(2, mangaId);
+		int line = st.executeUpdate();
+
+		st.close();
+		con.close();
+		
+		return line;
+	}
+	
 	public int delete01(String mangaId) throws Exception {
 		Connection con = getConnection();
 

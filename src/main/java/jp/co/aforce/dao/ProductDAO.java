@@ -74,7 +74,27 @@ public Product search02(String productId) throws Exception {
 		return list;
 	}
 	
-	
+	public String search04(String mangaId) throws Exception {
+		Connection con = getConnection();
+		
+		PreparedStatement st = con.prepareStatement("SELECT IMG_URL "
+				+ "FROM product_info t1 "
+				+ "LEFT OUTER JOIN (SELECT MANGA_ID, MAX(NUMBER) AS 'MAX' FROM product_info GROUP BY MANGA_ID) t2 "
+				+ "ON t1.MANGA_ID = t2.MANGA_ID "
+				+ "WHERE t1.NUMBER = t2.MAX "
+				+ "AND t1.MANGA_ID = ?");
+		st.setString(1, mangaId);
+		ResultSet rs = st.executeQuery();
+		
+		rs.next();
+		
+		String imgURL = rs.getString("IMG_URL");
+		
+		st.close();
+		con.close();
+		
+		return imgURL;
+	}
 	
 	public int insert01(Product product) throws Exception{
 		
@@ -123,6 +143,26 @@ public Product search02(String productId) throws Exception {
 				+ "WHERE PRODUCT_ID = ?");
 		st.setString(1, productId);
 		st.setString(2, product.getProductId());
+		int line = st.executeUpdate();
+
+		st.close();
+		con.close();
+		
+		return line;
+	}
+	
+	public int update03(Product product) throws Exception {
+
+		Connection con = getConnection();
+
+		PreparedStatement st = con.prepareStatement("UPDATE product_info SET "
+				+ "NUMBER = ?, PRICE = ?, DESCRIPTION = ?, IMG_URL = ?"
+				+ "WHERE PRODUCT_ID = ?");
+		st.setInt(1, product.getNumber());
+		st.setInt(2, product.getPrice());
+		st.setString(3, product.getDescription());
+		st.setString(4, product.getImgURL());
+		st.setString(5, product.getProductId());
 		int line = st.executeUpdate();
 
 		st.close();
