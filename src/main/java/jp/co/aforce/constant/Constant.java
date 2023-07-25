@@ -39,6 +39,7 @@ public class Constant {
 		public static final String W_C0005 = "この商品は既に追加されています。";
 		public static final String W_C0006 = "現在のパスワードが間違っています。";
 		public static final String W_C0007 = "新しいパスワードが一致していません";
+		public static final String W_C0008 = "このマンガタイトルの第{0}巻は既に存在します。";
 		public static final String E_W0001 = "会員情報登録に失敗しました。";
 		public static final String E_W0002 = "会員情報更新に失敗しました。";
 		public static final String E_W0003 = "会員情報削除に失敗しました。";

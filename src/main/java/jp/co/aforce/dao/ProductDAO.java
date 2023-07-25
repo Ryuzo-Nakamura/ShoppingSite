@@ -96,6 +96,27 @@ public Product search02(String productId) throws Exception {
 		return imgURL;
 	}
 	
+	public int search05(String mangaId, int number) throws Exception {
+		Connection con = getConnection();
+		
+		PreparedStatement st = con.prepareStatement("SELECT COUNT(*) "
+				+ "FROM product_info "
+				+ "WHERE MANGA_ID = ? "
+				+ "AND NUMBER = ?");
+		st.setString(1, mangaId);
+		st.setInt(2, number);
+		ResultSet rs = st.executeQuery();
+		
+		rs.next();
+		
+		int count = rs.getInt("COUNT(*)");
+		
+		st.close();
+		con.close();
+		
+		return count;
+	}
+	
 	public int insert01(Product product) throws Exception{
 		
 		Connection con = getConnection();
