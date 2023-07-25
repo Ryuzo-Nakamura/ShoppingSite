@@ -60,19 +60,19 @@
 		<div class="div-number">
 			<p>巻数</p>
 			<input type="number" name="number" class="form-text number-form"
-				value="<c:if test="${product.getNumber() != null}">${product.getNumber()}</c:if>"
+				value="<c:choose><c:when test="${number != null}">${number}</c:when><c:otherwise>${product.getNumber()}</c:otherwise></c:choose>"
 				min="0" max="999" required>
 		</div>
 		<div class="div-price">
 			<p>価格</p>
 			<input type="number" name="price" class="form-text price-form"
-				value="<c:if test="${product.getPrice() != null}">${product.getPrice()}</c:if>"
+				value="<c:choose><c:when test="${price != null}">${price}</c:when><c:otherwise>${product.getPrice()}</c:otherwise></c:choose>"
 				min="0" required>
 		</div>
 		<div class="div-description">
 			<p>作品情報</p>
 			<textarea name="description" rows="6" cols="75" class="form-textarea"
-				required>${product.getDescription()}</textarea>
+				required><c:choose><c:when test="${description != null}">${description}</c:when><c:otherwise>${product.getDescription()}</c:otherwise></c:choose></textarea>
 		</div>
 		<div class="div-file">
 			<p>商品画像アップロード</p>
@@ -80,7 +80,7 @@
 
 			<figure class="imgPreview">
 				<img src="${'/ShoppingSite/img/item/'.concat(product.getImgURL())}" id="updateImgPreview">
-				<figcaption>${product.getImgURL()}</figcaption>
+				<figcaption id="updateImgCaption">${product.getImgURL()}</figcaption>
 			</figure>
 		</div>
 		<div class="div-message">
@@ -99,6 +99,9 @@
 session.removeAttribute("manga");
 session.removeAttribute("product");
 session.removeAttribute("productManagementMessage");
+session.removeAttribute("number");
+session.removeAttribute("price");
+session.removeAttribute("description");
 %>
 
 

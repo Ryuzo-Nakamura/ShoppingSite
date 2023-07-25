@@ -38,15 +38,19 @@ public class ProductDelete extends HttpServlet {
 			
 			int line = productDAO.delete01(productId); // 商品をデータベースから削除
 			if(line != 1) {
-				session.setAttribute("mangaManagementMessage", Message.E_W0006);
+				session.setAttribute("productManagementMessage", Message.E_W0009);
 			}else {
 				MangaDAO mangaDAO = new MangaDAO();
 				Manga manga = mangaDAO.search03(product.getMangaId());
 				manga.reduceTotalNumber(); // 総巻数を減らす
 				mangaDAO.update02(manga);
 				
-				// 最新の単行本の画像をマンガタイトルの画像に変更
-				mangaDAO.update04(mangaId, productDAO.search04(mangaId));
+				if(manga.getTotalNumber() == 0) {
+					mangaDAO.update04(mangaId, null);
+				}else {
+					// 最新の単行本の画像をマンガタイトルの画像に変更
+					mangaDAO.update04(mangaId, productDAO.search04(mangaId));
+				}
 				session.setAttribute("adminManga", mangaDAO.search03(mangaId));
 				
 				// 削除した商品の画像ファイルをフォルダから削除
@@ -60,7 +64,7 @@ public class ProductDelete extends HttpServlet {
 				session.setAttribute("adminMangaList", mangaList);
 				session.setAttribute("adminProductList", productList);
 			}
-			response.sendRedirect("/ShoppingSite/views/manga-management.jsp");
+			response.sendRedirect("/ShoppingSite/views/product-management.jsp");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

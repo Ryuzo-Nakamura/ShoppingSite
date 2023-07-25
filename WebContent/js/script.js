@@ -247,6 +247,7 @@ $('#updateImg').on('change',function(e){
 	fileReader.onload = function(e){
 		$('.imgPreview').show();
 		$('#updateImgPreview').attr('src', e.target.result);
+		$('#updateImgCaption').text($('#updateImg').prop('files')[0].name);
 	}
 	fileReader.readAsDataURL(e.target.files[0]);
 });
