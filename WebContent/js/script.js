@@ -212,7 +212,9 @@ Array.from(document.getElementsByClassName('management-manga-list'))
 
 /*========================商品一覧クリックイベント=================*/
 
-// まとめて追加ボタンの押下可不可設定
+// チェックボックスの値変更
+// まとめて追加ボタンの押下可不可変更
+// 選択中の商品数を表示するテキストを変更
 $('.user-product-list').on('click', function(){
 	const check = $(this).children('.checkbox');
 	if(check.prop('checked')){
