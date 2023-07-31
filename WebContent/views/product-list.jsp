@@ -28,7 +28,7 @@
 			総巻数：${manga.getTotalNumber()}巻
 		</p>
 		<div class="div-btn">
-			<form action="/ShoppingSite/servlet/test" method="post">
+			<form action="/ShoppingSite/servlet/cart-add" method="post">
 				<input type="hidden" name="mangaId" value="${manga.getMangaId()}">
 				<input type="hidden" name="add-type" id="add-all" value="0">
 				<input type="submit" value="まとめ買い"	class="medium-btn" id="add-all-btn" >
