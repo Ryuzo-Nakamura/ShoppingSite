@@ -210,6 +210,54 @@ Array.from(document.getElementsByClassName('management-manga-list'))
     	});
 });
 
+/*========================商品一覧クリックイベント=================*/
+
+// チェックボックスの値変更
+// まとめて追加ボタンの押下可不可変更
+// 選択中の商品数を表示するテキストを変更
+$('.user-product-list').on('click', function(){
+	const check = $(this).children('.checkbox');
+	if(check.prop('checked')){
+		check.prop('checked', '').change();
+	}else{
+		check.prop('checked', 'checked').change();
+	}
+	if($('.checkbox:checked').length == 0){
+		$('#add-multi-btn').attr('disabled',true);
+		$('#add-multi-btn').css('background-color', '#d38693');
+		$('#add-multi-btn').css('border', '#d38693');
+		$('#check-text').text('商品が選択されていません');
+	}else{
+		$('#add-multi-btn').attr('disabled',false);
+		$('#add-multi-btn').css('background-color', '#ef2346');
+		$('#add-multi-btn').css('border', '#ef2346');
+		$('#check-text').text($('.checkbox:checked').length + '個の商品を選択中...');
+	}
+});
+
+// 子要素クリックに親要素のクリックイベント無効
+$('.user-product-list input[type="number"]').on('click',function(event){
+	event.stopPropagation();
+})
+
+$('.user-product-list input[type="submit"]').on('click',function(event){
+	event.stopPropagation();
+})
+
+// クリックしたボタンによって、input[name="addType"]のvalue変更
+$('#add-all-btn').on('click', function(){
+	$('#add-all').val("2");
+});
+
+
+$('#add-multi-btn').on('click', function(){
+	$('#add-multi').val("1");
+});
+
+$('.add-single-btn').on('click', function(){
+	$('#add-multi').val("0");
+	$('#add-single-id').val($(this).attr('id'));
+});
 
 
 /*========================配達先住所自動入力=======================*/

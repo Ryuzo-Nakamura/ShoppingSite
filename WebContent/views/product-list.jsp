@@ -30,7 +30,8 @@
 		<div class="div-btn">
 			<form action="/ShoppingSite/servlet/cart-add" method="post">
 				<input type="hidden" name="mangaId" value="${manga.getMangaId()}">
-				<input type="submit" value="まとめ買い"	class="medium-btn" >
+				<input type="hidden" name="add-type" id="add-all" value="0">
+				<input type="submit" value="まとめ買い"	class="medium-btn" id="add-all-btn" >
 			</form>
 		</div>
 	</div>
@@ -47,12 +48,19 @@
 	</label>
 </form>
 
-<div class="div-list">
-<%-- 選択されたマンガタイトルの製品を一覧で表示 --%>
-<c:forEach var="product" items="${productList}">
-	<form action="/ShoppingSite/servlet/cart-add" method="post">
-		<input type="hidden" name="productId" value="${product.getProductId()}">
-		<div class="product-list search-product-list" id="${'product-list-'.concat(item.getProductId())}">
+<form action="/ShoppingSite/servlet/cart-add" method="post">
+	<div class="div-btn">
+		<p id="check-text">商品が選択されていません</p>
+		<input type="submit" class="medium-btn" id="add-multi-btn" value="まとめて追加" disabled>
+		<input type="hidden" name="add-type" id="add-multi" value="0">
+	</div>
+	<div class="div-list">
+		<input type="hidden" name="add-productId" id="add-single-id" value="">
+		<c:forEach var="product" items="${productList}">
+			<input type="hidden" name="productId" value="${product.getProductId()}">
+			<div class="product-list search-product-list user-product-list" id="${'product-list-'.concat(item.getProductId())}">
+			<input type="checkbox" name="check" class="checkbox" id="${'check-'.concat(product.getProductId())}" value="${product.getProductId()}">
+			<label for="${'check-'.concat(product.getProductId())}" class="checkbox"></label>
 			<div class="productList-img">		
 			<img src="${'/ShoppingSite/img/item/'.concat(product.getImgURL())}" height="120px" width="auto">
 			</div>
@@ -61,12 +69,12 @@
 			<p class="description">${product.getDescription()}</p>
 			<div class="div-btn">
 				<input type="number" name="amount" class="amount-form" value="1" min="1" max="999" required>
-				<input type="submit" class="small-btn" value="カートに入れる">
+				<input type="submit" class="small-btn add-single-btn" id="${product.getProductId()}" value="カートに入れる">
 			</div>
 		</div>
-	</form>
-</c:forEach>
-</div>
+		</c:forEach>
+	</div>
+</form>
 
 </main>
 
