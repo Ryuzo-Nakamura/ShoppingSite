@@ -11,6 +11,7 @@
 
 
 	<div class="div-list">
+	<c:set var="num" value="0"/>
 	<%-- 選択されたマンガタイトルの製品を一覧で表示 --%>
 	<c:forEach var="product" items="${addedProductList}">
 		<form action="/ShoppingSite/servlet/cart-add" method="post">
@@ -21,7 +22,8 @@
 				</div>
 				<p class="manga-title">${manga.getTitle()} (${product.getNumber()})</p>
 				<p class="product-price"><span class="price"><span class="yen">￥</span>${product.getPrice()}</span></p>
-				<p class="amount">数量：${amount}</p>
+				<p class="amount">数量：${amountList.get(num)}</p>
+				<c:set var="num" value="${num + 1}"/>
 			</div>
 		</form>
 	</c:forEach>

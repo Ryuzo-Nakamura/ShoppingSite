@@ -432,6 +432,50 @@ header a{
 	width: 10%;
 }
 
+input[type=checkbox] {
+    display: none;
+}
+.checkbox {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 30px;
+    position: relative;
+    width: auto;
+}
+.checkbox::before {
+    background: white;
+    border: 1px solid #231815;
+    content: '';
+    display: block;
+    height: 16px;
+    left: 5px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+}
+.checkbox::after {
+    border-right: 4px solid white;
+    border-bottom: 4px solid white;
+    content: '';
+    display: block;
+    height: 9px;
+    left: 9.5px;
+    margin-top: -7px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: rotate(45deg);
+    width: 5px;
+}
+input[type=checkbox]:checked + .checkbox::before {
+    background: #ef2346;
+}
+input[type=checkbox]:checked + .checkbox::after {
+    opacity: 1;
+}
+
 /*=============================ホーム画面===================================*/
 #top-img{
 	position: relative;
@@ -705,11 +749,11 @@ header a{
 }
 
 .product-list{
-	padding: 10px 3% 20px 10px;
+	padding: 10px 3% 20px 0px;
 	margin-bottom: 20px;
 	
 	display: grid;
-	grid-template-columns: 120px 1fr 150px;
+	grid-template-columns: auto 120px 1fr 150px;
 	grid-template-rows: 20px 20px auto 30px;
 	gap: 10px;
 }
@@ -728,15 +772,35 @@ header a{
 	-moz-box-shadow:rgba(122, 122, 122, 0.125) 0px 0px 6px 3px;
 }
 
-.productList-img{
-	text-align: center;
+.user-product-list {
+	padding-left: 10px;
+}
+
+.product-list .checkbox {
+	margin: 0;
 	grid-column: 1 / 2;
 	grid-row: 1 / 5;
 }
 
+.productList-img{
+	text-align: center;
+	grid-column: 1 / 3;
+	grid-row: 1 / 5;
+}
+
+.user-product-list .productList-img{
+	text-align: center;
+	grid-column: 2 / 3;
+	grid-row: 1 / 5;
+}
+
+.product-list .manga-title{
+	grid-column: 3 / 4;
+	grid-row: 1 / 2;
+}
 
 .product-list .div-btn{
-	grid-column: 2 / 4;
+	grid-column: 3 / 5;
 	grid-row: 4 / 5;
 	text-align: right;
 }
@@ -756,12 +820,12 @@ header a{
 }
 
 .product-list .product-price{
-	grid-column: 3 / 4;
+	grid-column: 4 / 5;
 	grid-row: 1 / 2;
 }
 
 .product-list .amount{
-	grid-column: 2 / 3;
+	grid-column: 3 / 4;
 	grid-row: 3 / 4;
 }
 
@@ -780,7 +844,7 @@ header a{
 .description{
 	font-weight: 100;
 	font-size: 14px;
-	grid-column: 2 / 3;
+	grid-column: 3 / 4;
 	grid-row: 3 / 4;
 	margin: 0px
 }
@@ -818,6 +882,16 @@ header a{
 .amount {
 	margin: 0;
 	font-weight: bold;
+}
+
+#add-multi-btn {
+	background-color: #d38693;
+	border: #d38693;
+}
+
+#check-text {
+	display: inline-block;
+	margin: 20px 10px 0 0;
 }
 	
 /*========================カート追加画面==============================*/
