@@ -31,7 +31,6 @@
 			<form action="/ShoppingSite/servlet/cart-add" method="post">
 				<input type="hidden" name="mangaId" value="${manga.getMangaId()}">
 				<input type="hidden" name="add-type" id="add-all" value="0">
-				<input type="hidden" name="sort-type" id="sort-type" value="1">
 				<input type="submit" value="まとめ買い" class="medium-btn" id="add-all-btn"
 						<c:if test="${manga == null || productList.size() == 0}">
 								style="background-color:#d38693; border:#d38693" disabled</c:if>>
