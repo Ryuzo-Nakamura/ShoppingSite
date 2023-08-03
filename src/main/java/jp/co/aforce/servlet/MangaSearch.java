@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.aforce.bean.Manga;
 import jp.co.aforce.dao.MangaDAO;
+import jp.co.aforce.dao.WordDAO;
 
 
 @WebServlet("/servlet/manga-search")
@@ -39,17 +40,23 @@ public class MangaSearch extends HttpServlet {
 			}
 			String[] wordList = word.split("[ ,　、]");
 			
-			MangaDAO dao = new MangaDAO();
+			MangaDAO mangaDAO = new MangaDAO();
+			WordDAO wordDAO = new WordDAO();
 			List<Manga> mangaList = new ArrayList<>();
 			if(word.equals("")) {
-				mangaList = dao.search04(word); // 検索ワードを含むマンガタイトルリスト
+				mangaList = mangaDAO.search04(word); // 検索ワードを含むマンガタイトルリスト
 			}else if(wordList.length == 1) {
 				List<Manga> list = new ArrayList<>();
 				for(String w : wordList) {
-					list.addAll(dao.search04(w));
-					list.addAll(dao.search05(w));
-					list.addAll(dao.search06(w));
-					list.addAll(dao.search07(w));
+					if(wordDAO.search01(w, 1) >= 1) {
+						list.addAll(mangaDAO.search05(w));
+					}else if(wordDAO.search01(w, 2) >= 1) {
+						list.addAll(mangaDAO.search06(w));
+					}else if(wordDAO.search01(w, 3) >= 1) {
+						list.addAll(mangaDAO.search07(w));
+					}else {
+						list.addAll(mangaDAO.search04(w));
+					}
 				}
 				List<String> mangaIdList = new ArrayList<>();
 				for(int i = 0 ; i < list.size(); i++) {
@@ -71,10 +78,15 @@ public class MangaSearch extends HttpServlet {
 				List<Manga> searchList = new ArrayList<>();
 				List<Manga> list = new ArrayList<>();
 				for(String w : wordList) {
-					searchList.addAll(dao.search04(w));
-					searchList.addAll(dao.search05(w));
-					searchList.addAll(dao.search06(w));
-					searchList.addAll(dao.search07(w));
+					if(wordDAO.search01(w, 1) >= 1) {
+						searchList.addAll(mangaDAO.search05(w));
+					}else if(wordDAO.search01(w, 2) >= 1) {
+						searchList.addAll(mangaDAO.search06(w));
+					}else if(wordDAO.search01(w, 3) >= 1) {
+						searchList.addAll(mangaDAO.search07(w));
+					}else {
+						searchList.addAll(mangaDAO.search04(w));
+					}
 				}
 				for(int i = 0; i < searchList.size() ; i++) {
 					int count = 0;

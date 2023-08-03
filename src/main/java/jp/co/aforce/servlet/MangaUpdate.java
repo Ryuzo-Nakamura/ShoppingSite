@@ -36,6 +36,10 @@ public class MangaUpdate extends HttpServlet {
 			}else {
 				session.setAttribute("adminManga", dao.search03(manga.getMangaId()));
 				session.setAttribute("mangaManagementMessage", Message.I_W0002.replace("{0}", manga.getMangaId()));
+				request.setAttribute("author", manga.getAuthor());
+				request.setAttribute("publisher", manga.getPublisher());
+				request.setAttribute("genre", manga.getGenre());
+				request.getRequestDispatcher("/servlet/word-add").include(request, response);
 			}
 			response.sendRedirect("/ShoppingSite/views/manga-info.jsp");
 		} catch (Exception e) {
