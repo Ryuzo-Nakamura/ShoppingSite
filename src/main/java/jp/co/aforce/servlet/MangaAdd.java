@@ -48,6 +48,10 @@ public class MangaAdd extends HttpServlet {
 					response.sendRedirect("/ShoppingSite/views/manga-add.jsp");
 				} else {
 					session.setAttribute("mangaAddMessage", Message.I_W0001);
+					request.setAttribute("author", manga.getAuthor());
+					request.setAttribute("publisher", manga.getPublisher());
+					request.setAttribute("genre", manga.getGenre());
+					request.getRequestDispatcher("/servlet/word-add").include(request, response);
 					response.sendRedirect("/ShoppingSite/views/manga-add.jsp");
 				}
 			}
