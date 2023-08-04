@@ -8,6 +8,13 @@ import jp.co.aforce.bean.Word;
 
 public class WordDAO extends DAO{
 
+	/**
+	 * 検索ワードとワードタイプを条件に該当レコード件数を検索するメソッド
+	 * @param word 検索ワード
+	 * @param type ワードタイプ(1/出版社,2/作者,3/ジャンル)
+	 * @return 検索結果の件数
+	 * @throws Exception
+	 */
 	public int search01(String word, int type) throws Exception {
 
 		Connection con = getConnection();
@@ -27,6 +34,12 @@ public class WordDAO extends DAO{
 		return count;
 	}
 	
+	/**
+	 * ワードタイプを条件に該当レコード件数を検索するメソッド
+	 * @param type ワードタイプ(1/出版社,2/作者,3/ジャンル)
+	 * @return 検索結果の件数
+	 * @throws Exception
+	 */
 	public int search02(int type) throws Exception {
 
 		Connection con = getConnection();
@@ -46,6 +59,12 @@ public class WordDAO extends DAO{
 	}
 	
 	
+	/**
+	 * 検索ワード情報を検索ワード情報テーブルに追加するメソッド
+	 * @param word 検索ワード情報(検索ワードID,検索ワード,ワードタイプ)
+	 * @return	追加したレコードの件数
+	 * @throws Exception
+	 */
 	public int insert01(Word word) throws Exception {
 
 		Connection con = getConnection();
