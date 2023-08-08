@@ -477,6 +477,53 @@ input[type=checkbox]:checked + .checkbox::after {
 }
 
 /*=============================ホーム画面===================================*/
+
+/* Loading背景画面設定　*/
+#splash {
+/*fixedで全面に固定*/
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background:white;
+  text-align:center;
+  color:#fff;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+  width:450px;
+}
+
+/* fadeUpをするアイコンの動き */
+.fadeUp{
+animation-name: fadeUpAnime;
+animation-duration:0.5s;
+animation-fill-mode:forwards;
+opacity: 0;
+}
+
+@keyframes fadeUpAnime{
+  from {
+    opacity: 0;
+  transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+  transform: translateY(0);
+  }
+}
+
 #top-img{
 	position: relative;
 	margin-top: 80px;
@@ -527,6 +574,11 @@ input[type=checkbox]:checked + .checkbox::after {
 .slider {/*横幅94%で左右に余白を持たせて中央寄せ*/
     width:94%;
     margin:0 auto;
+    display: none;
+}
+
+.slider.slick-initialized {
+	display: block;
 }
 
 .top-slider img {
