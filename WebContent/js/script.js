@@ -131,10 +131,6 @@ Array.from(document.getElementsByClassName('home-img'))
     	});
 });
 
-$(document).ready(function(){
-	$('.slider').css('height','auto');
-});
-
 /*================会員情報画面クリックイベント=================*/
 
 // 会員情報変更/削除
