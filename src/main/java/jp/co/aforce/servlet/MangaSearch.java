@@ -146,8 +146,9 @@ public class MangaSearch extends HttpServlet {
 				}
 				mangaList = list;
 			}
+			int sort = 1;
 			if(request.getParameter("sort") != null) {
-				int sort = Integer.parseInt(request.getParameter("sort"));
+				sort = Integer.parseInt(request.getParameter("sort"));
 				if(sort == 2) {
 					// ソートが「商品番号(降順)」のため、出力するマンガ情報リストを反転
 					Collections.reverse(mangaList);
@@ -187,7 +188,7 @@ public class MangaSearch extends HttpServlet {
 				session.setAttribute("mangaList", mangaList);
 				// 入力された検索ワードを設定
 				session.setAttribute("searchWord", word);
-				request.setAttribute("sort", 1);
+				session.setAttribute("sort", sort);
 				response.sendRedirect("/ShoppingSite/views/manga-list.jsp");
 			}
 		}catch(Exception e) {
