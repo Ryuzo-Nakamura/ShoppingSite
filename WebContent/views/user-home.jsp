@@ -6,6 +6,12 @@
 
 <%@ include file="header.jsp" %>
 
+<!-- ロード画面 -->
+<div id="splash">
+	<div id="splash_logo"><img src="/ShoppingSite/img/logo.png" class="fadeUp"></div>
+</div>
+
+<!-- ホーム画面 -->
 <div id="top-img">
 	<img src="/ShoppingSite/img/top-img.jpg" width="100%">
 	<div id="top-title">

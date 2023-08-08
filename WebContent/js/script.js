@@ -48,6 +48,12 @@ $(window).scroll(function () {
 });
 
 $(window).on('load', function(){
+	if($('#splash')[0] != null){
+		$(document).ready(function(){
+			$("#splash").delay(1500).fadeOut('slow');//ローディング画面を1.5秒（1500ms）待機してからフェードアウト
+  			$("#splash_logo").delay(1200).fadeOut('slow');//ロゴを1.2秒（1200ms）待機してからフェードアウト
+		});
+	}
 	// テキストが1文字ずつ出現
 		let element = $(".eachTextAnime");
 		element.each(function() {
@@ -82,7 +88,7 @@ $('#page-top').click(function () {
 $('.top-slider').slick({
 		autoplay: true,//自動的に動き出すか。初期値はfalse。
 		infinite: true,//スライドをループさせるかどうか。初期値はtrue。
-		speed: 500,//スライドのスピード。初期値は300。
+		speed: 1000,//スライドのスピード。初期値は300。
 		slidesToShow: 3,//スライドを画面に3枚見せる
 		slidesToScroll: 1,//1回のスクロールで1枚の写真を移動して見せる
 		prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
@@ -95,8 +101,8 @@ $('.top-slider').slick({
 $('.manga-slider').slick({
 		autoplay: false,//自動的に動き出すか。初期値はfalse。
 		infinite: true,//スライドをループさせるかどうか。初期値はtrue。
-		slidesToShow: 8,//スライドを画面に3枚見せる
-		slidesToScroll: 8,//1回のスクロールで3枚の写真を移動して見せる
+		slidesToShow: 8,//スライドを画面に8枚見せる
+		slidesToScroll: 8,//1回のスクロールで8枚の写真を移動して見せる
 		prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
 		nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
 		dots: true,//下部ドットナビゲーションの表示
@@ -123,6 +129,10 @@ Array.from(document.getElementsByClassName('home-img'))
 		target.addEventListener('click',e=>{
     		e.target.closest('form').submit();
     	});
+});
+
+$(document).ready(function(){
+	$('.slider').css('height','auto');
 });
 
 /*================会員情報画面クリックイベント=================*/
